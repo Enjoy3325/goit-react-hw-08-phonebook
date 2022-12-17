@@ -1,14 +1,18 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Home } from 'redux/pages/home/home';
+import { Home } from 'redux/pages/Home/Home';
+// import { LogIn } from 'redux/pages/login/login';
+// import { Register } from 'redux/pages/register/register';
 
 export const SharedLayout = () => {
   return (
     <>
-      <Home></Home>
       <Suspense>
-        <Outlet />
+        <Home></Home>
+        {/* <LogIn></LogIn>
+        <Register></Register> */}
       </Suspense>
+      <Outlet />
     </>
   );
 };

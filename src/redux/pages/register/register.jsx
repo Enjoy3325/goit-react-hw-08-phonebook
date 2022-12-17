@@ -1,3 +1,4 @@
+import { ButtonBack } from 'components/ButtonBack/ButtonBack';
 import { Password } from 'components/Password/Password';
 
 export const Register = () => {
@@ -29,6 +30,7 @@ export const Register = () => {
           <Password />
         </label>
         <button type="submit">Sign In</button>
+        <ButtonBack />
       </form>
     </div>
   );

@@ -1,9 +1,9 @@
-import { home } from 'redux/pages/home/home';
+import { Home } from 'redux/pages/Home/Home';
 
 export const Navigation = () => {
   return (
     <>
-      {!home && (
+      {!Home && (
         <div>
           <h1>Sorry, error. Not find!</h1>
         </div>
