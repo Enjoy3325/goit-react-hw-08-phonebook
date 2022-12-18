@@ -1,13 +1,10 @@
-import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from '../../components/SharedLayout/SharedLayout';
-
-import { Navigation } from '../../components/Navigation/Navigation';
-
-const Home = lazy(() => import('../pages/Home/Home'));
-const Register = lazy(() => import('../pages/Register/Register'));
-const LogIn = lazy(() => import('../pages/Login/Login'));
-const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
+import { Home } from 'pages/Home/Home';
+import { Register } from 'pages/Register/Register';
+import { LogIn } from 'pages/Login/Login';
+import { Contacts } from 'pages/Contacts/Contacts';
+import { Page404 } from 'pages/Page404/Page404';
 
 export const App = () => {
   return (
@@ -17,7 +14,7 @@ export const App = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contacts" element={<Contacts />} />
-        <Route path="*" element={<Navigation to="/" />} />
+        <Route path="/*" element={<Page404 />} />
       </Route>
     </Routes>
   );

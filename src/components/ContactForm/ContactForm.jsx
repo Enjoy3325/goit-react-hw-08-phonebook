@@ -1,5 +1,5 @@
-import { fetchAddNewContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { fetchAddNewContact } from 'redux/contacts/contactsOperations';
+import { getContacts } from 'redux/contacts/contactSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import {

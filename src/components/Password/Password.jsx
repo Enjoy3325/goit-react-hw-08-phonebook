@@ -10,7 +10,7 @@ export const Password = () => {
     'toggle-icon-passive'
   );
   const [ripple, setRipple] = useState('');
-  const [passLabel, setPassLabel] = useState('Strength');
+  const [passLabel, setPassLabel] = useState('Not enough');
   const [type, setType] = useState('password');
 
   const addClass = className => {
@@ -21,17 +21,19 @@ export const Password = () => {
   };
 
   const handlePassInput = e => {
+    e.preventDefault();
     setPassInputChange(e.target.value);
-    if (passInputChange.length === 0) {
-      setPassLabel('Strength');
+
+    if (passInputChange.length === 0 && passInputChange.length <= 5) {
+      setPassLabel('Not enough');
       addClass();
-    } else if (passInputChange.length <= 6) {
+    } else if (passInputChange.length >= 6 && passInputChange.length < 9) {
       setPassLabel('Weak');
       addClass('weak');
-    } else if (passInputChange.length <= 9) {
+    } else if (passInputChange.length > 9 && passInputChange.length <= 11) {
       setPassLabel('Not Bad');
       addClass('average');
-    } else {
+    } else if (passInputChange.length > 11) {
       setPassLabel('Strong');
       addClass('strong');
     }
@@ -60,10 +62,9 @@ export const Password = () => {
             id="pin"
             type={type}
             name="password"
-            minlength="6"
-            maxlength="15"
+            min="6"
+            max="15"
             required
-            autocomplete="off"
             className={passInputClasses}
             placeholder="Enter your password"
             value={passInputChange}

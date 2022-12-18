@@ -1,4 +1,4 @@
-import { chengeFilter } from 'redux/slice/contactsSlice';
+import { chengeFilter } from 'redux/contacts/contactsSlice';
 import { useDispatch } from 'react-redux';
 import { InputFilter, TextFilter, LabelFilter } from './Filter.styled';
 import { nanoid } from 'nanoid';

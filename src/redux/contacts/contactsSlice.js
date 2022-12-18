@@ -2,7 +2,7 @@ import {
   fetchContacts,
   fetchDeleteContacts,
   fetchAddNewContact,
-} from 'redux/operations';
+} from 'redux/contacts/contactsOperations';
 import { createSlice } from '@reduxjs/toolkit';
 
 const setPending = state => {
