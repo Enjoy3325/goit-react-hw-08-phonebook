@@ -10,7 +10,6 @@ export const ListContacts = () => {
   const dispatch = useDispatch();
   const filterValue = useSelector(getFilter);
   const contacts = useSelector(getContacts);
-  console.log('filterValue :>> ', filterValue);
 
   const handlDeleteContacts = contactId => {
     dispatch(fetchDeleteContacts(contactId));

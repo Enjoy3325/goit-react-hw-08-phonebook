@@ -18,6 +18,7 @@ export const App = () => {
       dispatch(currentUser());
     }
   }, []);
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>

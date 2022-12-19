@@ -36,7 +36,7 @@ export const fetchDeleteContacts = createAsyncThunk(
   async (contactId, { rejectWithValue }) => {
     try {
       const response = await PrivateApi.delete(`/contacts/${contactId}`);
-      console.log('response :>> ', response);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -17,6 +17,7 @@ export const Header = () => {
         <NavLink onClick={hendleLogout} to="/login">
           Log out
         </NavLink>
+
         <NavLink to="/register">Register</NavLink>
       </nav>
     </div>

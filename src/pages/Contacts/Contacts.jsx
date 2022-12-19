@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 export const Contacts = () => {
   const { error, status, items } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
-  console.log('items :>> ', items);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);

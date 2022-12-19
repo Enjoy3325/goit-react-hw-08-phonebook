@@ -29,8 +29,9 @@ const authSlice = createSlice({
     isAuth: false,
   },
   reducers: {
-    logautEction: (state, ation) => {
+    logautEction: (state, action) => {
       state.token = null;
+      state.user = action;
     },
   },
 

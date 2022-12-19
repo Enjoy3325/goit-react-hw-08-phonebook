@@ -62,7 +62,7 @@ export const currentUser = createAsyncThunk(
       token.set(tokenValue);
       const response = await PrivateApi.get('/users/current');
       // token.set(response.data.token);
-      console.log('response.data :>> ', response.data);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
