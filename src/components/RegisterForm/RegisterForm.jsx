@@ -1,33 +1,80 @@
 // import { ButtonBack } from 'components/ButtonBack/ButtonBack';
-import { Password } from 'components/Password/Password';
+import { registerUser } from 'redux/auth/authOperations';
+import { useState } from 'react';
+import { Input } from 'components/Input/Input';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 export const RegisterForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
   const location = useLocation();
+
+  // Контрольований інпут
+  const handleNameChange = event => setName(event.target.value);
+  const handleEmailChange = event => setEmail(event.target.value);
+  const handlePasswordChange = event => setPassword(event.target.value);
+
+  const handleRegisterSubmit = e => {
+    e.preventDefault();
+    const registerData = {
+      name,
+      email,
+      password,
+    };
+
+    dispatch(registerUser(registerData));
+    reset();
+  };
+  const reset = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleRegisterSubmit}>
         <label>
           <b>Name</b>
-          <input type="text" name="name" placeholder="Jack" required></input>
+          <Input
+            onChange={handleNameChange}
+            placeholder="Jack"
+            type="text"
+            name="name"
+            required
+            value={name}
+          />
         </label>
         <label>
           <b>Email</b>
-          <input
+
+          <Input
             type="email"
             name="email"
             placeholder="arhnold@gmail.com"
             required
-          ></input>
+            onChange={handleEmailChange}
+            value={email}
+          />
         </label>
         <label htmlFor="pin">
           <b>Password</b>
-          <Password />
+          <Input
+            onChange={handlePasswordChange}
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Enter your password"
+            required
+          />
         </label>
         <button type="submit">Sign In</button>
-        <NavLink to={'login'} state={{ from: location }}>
+        <NavLink to={'/login'} state={{ from: location }}>
           Log in
         </NavLink>
       </form>

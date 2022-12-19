@@ -27,7 +27,7 @@ export const ContactForm = () => {
     e.preventDefault();
 
     const data = {
-      id: nanoid(),
+      // id: nanoid(),
       name,
       number,
     };

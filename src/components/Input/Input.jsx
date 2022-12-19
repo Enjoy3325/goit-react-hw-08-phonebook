@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const Password = () => {
+export const Input = ({ onChange, placeholder, name, required, value }) => {
   const [precentBar, setPrecentBar] = useState('');
   const [passInputChange, setPassInputChange] = useState('');
   const [passInputClasses, setPassInputClasses] =
@@ -19,7 +20,13 @@ export const Password = () => {
       setPrecentBar(className);
     }
   };
-
+  const toggleType = () => {
+    if (type === 'password') {
+      setType('text');
+      return;
+    }
+    setType('password');
+  };
   const handlePassInput = e => {
     e.preventDefault();
     setPassInputChange(e.target.value);
@@ -59,23 +66,18 @@ export const Password = () => {
       <div className="input-container">
         <div className="input-group">
           <input
-            id="pin"
-            type={type}
-            name="password"
+            id={name}
+            type={toggleIcon === '🙈' ? type : 'text'}
+            name={name}
             min="6"
             max="15"
-            required
+            required={required}
             className={passInputClasses}
-            placeholder="Enter your password"
-            value={passInputChange}
-            onChange={handlePassInput}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
           />
-          <span
-            onClick={togglePassInput}
-            className={`toggle ${toggleIconClasses}`}
-          >
-            {toggleIcon}
-          </span>
+          <span onChange={togglePassInput()}></span>
           <span className={`ripple ${ripple}`}></span>
         </div>
         <div className="pass-strength">
@@ -88,3 +90,13 @@ export const Password = () => {
     </div>
   );
 };
+
+Input.propTypes = {
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  required: PropTypes.bool,
+  value: PropTypes.node,
+};
+
+// ={type === 'password' ? '🙈' : '🙉'}

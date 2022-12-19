@@ -13,6 +13,7 @@ const setPending = state => {
 const setfulfilled = (state, { payload }) => {
   state.status = 'resolved';
   state.items = payload;
+  state.error = null;
 };
 
 const setError = (state, { payload }) => {

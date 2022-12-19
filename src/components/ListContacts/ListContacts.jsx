@@ -12,8 +12,8 @@ export const ListContacts = () => {
   const contacts = useSelector(getContacts);
   console.log('filterValue :>> ', filterValue);
 
-  const handlDeleteContacts = id => {
-    dispatch(fetchDeleteContacts(id));
+  const handlDeleteContacts = contactId => {
+    dispatch(fetchDeleteContacts(contactId));
   };
 
   return (

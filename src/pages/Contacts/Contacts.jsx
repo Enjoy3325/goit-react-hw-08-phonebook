@@ -8,8 +8,9 @@ import { fetchContacts } from '../../redux/contacts/contactsOperations';
 import { ButtonBack } from 'components/ButtonBack/ButtonBack';
 import { useEffect } from 'react';
 export const Contacts = () => {
-  const { error, status } = useSelector(state => state.contacts);
+  const { error, status, items } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
+  console.log('items :>> ', items);
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);

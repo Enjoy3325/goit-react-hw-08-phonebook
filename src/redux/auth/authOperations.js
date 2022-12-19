@@ -1,55 +1,68 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import { PrivateApi, PublicApi, token } from 'http/http';
 
 // Регістрація
-export const fetchUsersSignup = createAsyncThunk(
-  '/users/fetchUsersSignup',
-  async (_, { rejectWithValue }) => {
+export const registerUser = createAsyncThunk(
+  'auth/registerUser',
+  async ({ name, email, password }, thunkAPI) => {
     try {
-      const response = await axios.post('/users/signup', {
-        name: null,
-        email: null,
-        password: null,
+      const response = await PublicApi.post('/users/signup', {
+        name: name,
+        email: email,
+        password: password,
       });
+
+      token.set(response.data.token);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 // Логінізація
-export const fetchUsersLogin = createAsyncThunk(
-  '/users/fetchUsersLogin',
-  async (_, { rejectWithValue }) => {
+export const loginUser = createAsyncThunk(
+  '/auth/loginUser',
+  async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axios.post('/users/login');
+      const response = await PublicApi.post('/users/login', {
+        email: email,
+        password: password,
+      });
+      token.set(response.data.token);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 //  вихід з особистого кабінету, вилогування
-export const fetchUsersLogout = createAsyncThunk(
-  '/users/fetchUsersLogout',
-  async (_, { rejectWithValue }) => {
+export const logoutUser = createAsyncThunk(
+  '/auth/logoutUser',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.post('/users/logout');
+      const response = await PrivateApi.post('/users/logout');
+      token.unset();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 //Юзерс поточний
-export const fetchUsersCurrent = createAsyncThunk(
-  '/users/fetchUsersCurrent',
-  async (_, { rejectWithValue }) => {
+export const currentUser = createAsyncThunk(
+  '/auth/currentUser',
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState();
+    const tokenValue = state.auth.token;
     try {
-      const response = await axios.get('/users/current');
+      token.set(tokenValue);
+      const response = await PrivateApi.get('/users/current');
+      // token.set(response.data.token);
+      console.log('response.data :>> ', response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

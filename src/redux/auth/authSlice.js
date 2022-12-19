@@ -1,8 +1,8 @@
 import {
-  fetchUsersSignup,
-  fetchUsersLogin,
-  fetchUsersLogout,
-  fetchUsersCurrent,
+  registerUser,
+  loginUser,
+  logoutUser,
+  currentUser,
 } from './authOperations';
 
 import { createSlice } from '@reduxjs/toolkit';
@@ -12,11 +12,6 @@ const setPending = state => {
   state.error = null;
 };
 
-const setfulfilled = (state, { payload }) => {
-  state.status = 'resolved';
-  state.items = payload;
-};
-
 const setError = (state, { payload }) => {
   state.status = 'rejected';
   state.error = payload;
@@ -24,7 +19,7 @@ const setError = (state, { payload }) => {
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    users: {
+    user: {
       name: null,
       email: null,
     },
@@ -33,35 +28,52 @@ const authSlice = createSlice({
     error: null,
     isAuth: false,
   },
-  reducers: {},
+  reducers: {
+    logautEction: (state, ation) => {
+      state.token = null;
+    },
+  },
 
   extraReducers: builder => {
-    builder.addCase(fetchUsersLogin.pending, setPending);
-    builder.addCase(fetchUsersLogin.fulfilled, setfulfilled);
-    builder.addCase(fetchUsersLogin.rejected, setError);
+    builder
+      .addCase(loginUser.pending, setPending)
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(loginUser.rejected, setError)
 
-    builder.addCase(fetchUsersLogout.pending, setPending);
-    builder.addCase(fetchUsersLogout.fulfilled, (state, { payload }) => {
-      state.status = 'resolved';
-      state.users = state.users.filter(user => {
-        return user.id !== payload.id;
-      });
-    });
-    builder.addCase(fetchUsersCurrent.pending, setPending);
-    builder.addCase(fetchUsersCurrent.fulfilled, setfulfilled);
-    builder.addCase(fetchUsersCurrent.rejected, setError);
+      .addCase(logoutUser.pending, setPending)
+      .addCase(logoutUser.fulfilled, state => {
+        state.status = 'resolved';
+        state.user = {
+          name: null,
+          email: null,
+        };
+        state.token = null;
+      })
 
-    builder.addCase(fetchUsersSignup.pending, setPending);
-    builder.addCase(fetchUsersSignup.fulfilled, (state, { payload }) => {
-      state.status = 'resolved';
-      state.users = [...state.users, payload];
-    });
-    builder.addCase(fetchUsersSignup.rejected, setError);
+      .addCase(currentUser.pending, setPending)
+      .addCase(currentUser.fulfilled, (state, action) => {
+        state.status = 'resolved';
+
+        state.user = action.payload;
+      })
+      .addCase(currentUser.rejected, setError)
+
+      .addCase(registerUser.pending, setPending)
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(registerUser.rejected, setError);
   },
 });
 
 //--- Генератор слайсу
-// export const { addContacts, deleteContacts, chengeFilter } = authSlice.actions;
+export const { logautEction } = authSlice.actions;
 
 //--- Редюсер слайсу
 export const authReducer = authSlice.reducer;
