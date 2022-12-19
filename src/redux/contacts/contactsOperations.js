@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { PrivateApi } from 'http/http';
-import { number } from 'prop-types';
 
 // Отримання контактів
 export const fetchContacts = createAsyncThunk(

@@ -1,5 +1,5 @@
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export const Register = () => {
   return (

@@ -95,12 +95,12 @@ export const Input = ({
   );
 };
 
-// Input.propTypes = {
-//   onChange: PropTypes.func,
-//   placeholder: PropTypes.string,
-//   name: PropTypes.string,
-//   required: PropTypes.bool,
-//   value: PropTypes.node,
-// };
+Input.propTypes = {
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  required: PropTypes.bool,
+  value: PropTypes.node,
+};
 
 // ={type === 'password' ? '🙈' : '🙉'}
