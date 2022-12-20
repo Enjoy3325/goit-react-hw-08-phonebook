@@ -84,7 +84,7 @@ export const Input = ({
             value={value}
             onChange={onChange}
           />
-          {/* <span onChange={{ handlePassInput }}></span> */}
+          {/* <span onChange={{ togglePassInput }}></span> */}
           {/* <span className={`ripple ${ripple}`}></span> */}
         </div>
         <div className="pass-strength">

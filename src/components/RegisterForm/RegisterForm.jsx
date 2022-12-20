@@ -26,7 +26,7 @@ export const RegisterForm = () => {
       email,
       password,
     };
-
+    console.log('registerData :>> ', registerData);
     dispatch(registerUser(registerData));
     reset();
   };

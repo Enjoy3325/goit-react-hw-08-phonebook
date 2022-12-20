@@ -17,7 +17,7 @@ export const App = () => {
     if (selectorToken && !selectorName) {
       dispatch(currentUser());
     }
-  }, []);
+  }, [dispatch, selectorToken, selectorName]);
 
   return (
     <Routes>

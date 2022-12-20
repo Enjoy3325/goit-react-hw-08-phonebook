@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { LinkHeader } from './Header.styled';
 import { logoutUser } from 'redux/auth/authOperations';
+import { WrapperHeader } from './Header.styled';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -8,18 +9,18 @@ export const Header = () => {
     dispatch(logoutUser());
   };
   return (
-    <div>
+    <WrapperHeader>
       <nav>
-        <NavLink to="/" end="true">
+        <LinkHeader to="/" end="true">
           Home
-        </NavLink>
-        <NavLink to="/login">Log in</NavLink>
-        <NavLink onClick={hendleLogout} to="/login">
+        </LinkHeader>
+        <LinkHeader to="/login">Log in</LinkHeader>
+        <LinkHeader onClick={hendleLogout} to="/login">
           Log out
-        </NavLink>
+        </LinkHeader>
 
-        <NavLink to="/register">Register</NavLink>
+        <LinkHeader to="/register">Register</LinkHeader>
       </nav>
-    </div>
+    </WrapperHeader>
   );
 };
