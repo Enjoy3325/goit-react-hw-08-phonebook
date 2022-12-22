@@ -1,9 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinkHeader } from './Header.styled';
 import { logoutUser } from 'redux/auth/authOperations';
 import { WrapperHeader } from './Header.styled';
 
 export const Header = () => {
+  const isAuth = useSelector(state => state.auth.isAuth);
+  console.log('isAuth :>> ', isAuth);
   const dispatch = useDispatch();
   const hendleLogout = () => {
     dispatch(logoutUser());
@@ -14,12 +16,15 @@ export const Header = () => {
         <LinkHeader to="/" end="true">
           Home
         </LinkHeader>
-        <LinkHeader to="/login">Log in</LinkHeader>
-        <LinkHeader onClick={hendleLogout} to="/login">
-          Log out
-        </LinkHeader>
 
-        <LinkHeader to="/register">Register</LinkHeader>
+        {isAuth ? (
+          <LinkHeader onClick={hendleLogout} to="/">
+            Log out
+          </LinkHeader>
+        ) : (
+          <LinkHeader to="/login">Log in</LinkHeader>
+        )}
+        {!isAuth && <LinkHeader to="/register">Register</LinkHeader>}
       </nav>
     </WrapperHeader>
   );

@@ -8,6 +8,7 @@ import { Input } from '../../components/Input/Input';
 export const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [isLogin, setIsLogin] = useState();
   const dispatch = useDispatch();
   const location = useLocation();
 

@@ -42,6 +42,7 @@ const authSlice = createSlice({
         state.status = 'resolved';
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isAuth = true;
       })
       .addCase(loginUser.rejected, setError)
 
@@ -53,6 +54,7 @@ const authSlice = createSlice({
           email: null,
         };
         state.token = null;
+        state.isAuth = false;
       })
 
       .addCase(currentUser.pending, setPending)
