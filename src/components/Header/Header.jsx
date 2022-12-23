@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkHeader } from './Header.styled';
 import { logoutUser } from 'redux/auth/authOperations';
 import { WrapperHeader } from './Header.styled';
-import { ButtonBack } from 'components/ButtonBack/ButtonBack';
 
 export const Header = () => {
   const isAuth = useSelector(state => state.auth.isAuth);
