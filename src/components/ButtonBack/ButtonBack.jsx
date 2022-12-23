@@ -1,12 +1,13 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { LinkHeader } from 'components/Header/Header.styled';
+import { useLocation } from 'react-router-dom';
 export const ButtonBack = () => {
   const location = useLocation();
 
   return (
     <>
-      <NavLink to={'/'} state={{ from: location }}>
+      <LinkHeader to={'/'} state={{ from: location }}>
         <b>Go back</b>
-      </NavLink>
+      </LinkHeader>
     </>
   );
 };

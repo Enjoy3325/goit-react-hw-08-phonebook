@@ -26,9 +26,9 @@ export const Contacts = () => {
         <div>
           <Filter />
           <h2>Contacts</h2>
+          <ButtonBack />
           <ListContacts />
         </div>
-        <ButtonBack />
       </section>
     </Wrapper>
   );
