@@ -68,7 +68,7 @@ export const currentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     // Reading the token from the state via getState()
     const state = thunkAPI.getState();
-    console.log('persistedToken :>> ', persistedToken);
+    s;
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
