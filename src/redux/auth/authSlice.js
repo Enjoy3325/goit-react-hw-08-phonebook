@@ -46,13 +46,9 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, setError)
 
-      .addCase(logoutUser.pending, setPending)
       .addCase(logoutUser.fulfilled, state => {
-        state.status = 'resolved';
-        state.user = {
-          name: null,
-          email: null,
-        };
+        // state = state.initialState;
+        state.user = null;
         state.token = null;
         state.isAuth = false;
       })
@@ -60,7 +56,6 @@ const authSlice = createSlice({
       .addCase(currentUser.pending, setPending)
       .addCase(currentUser.fulfilled, (state, action) => {
         state.status = 'resolved';
-
         state.user = action.payload;
       })
       .addCase(currentUser.rejected, setError)

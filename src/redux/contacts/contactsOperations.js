@@ -1,13 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { PrivateApi } from 'http/http';
 
 // Отримання контактів
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await PrivateApi.get('/contacts');
+      const response = await axios.get('/contacts');
 
       return response.data;
     } catch (error) {
@@ -21,7 +20,7 @@ export const fetchAddNewContact = createAsyncThunk(
   'contacts/fetchAddNewContact',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await PrivateApi.post(`/contacts`, data);
+      const response = await axios.post(`/contacts`, data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -34,7 +33,7 @@ export const fetchDeleteContacts = createAsyncThunk(
   'contacts/fetchDeleteContacts',
   async (contactId, { rejectWithValue }) => {
     try {
-      const response = await PrivateApi.delete(`/contacts/${contactId}`);
+      const response = await axios.delete(`/contacts/${contactId}`);
 
       return response.data;
     } catch (error) {

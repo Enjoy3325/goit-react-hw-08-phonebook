@@ -1,12 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkHeader } from './Header.styled';
-import { logoutUser } from 'redux/auth/authOperations';
+import { logoutUser, loginUser } from 'redux/auth/authOperations';
 import { WrapperHeader } from './Header.styled';
+import { selectIsAuth } from 'redux/auth/authSelectors';
 
 export const Header = () => {
-  const isAuth = useSelector(state => state.auth.isAuth);
+  const isAuth = useSelector(selectIsAuth);
   console.log('isAuth :>> ', isAuth);
   const dispatch = useDispatch();
+
+  const hendeleLogin = () => {
+    dispatch(loginUser());
+  };
   const hendleLogout = () => {
     dispatch(logoutUser());
   };
@@ -22,7 +27,9 @@ export const Header = () => {
             Log out
           </LinkHeader>
         ) : (
-          <LinkHeader to="/login">Log in</LinkHeader>
+          <LinkHeader onClick={hendeleLogin} to="/login">
+            Log in
+          </LinkHeader>
         )}
         {!isAuth && <LinkHeader to="/register">Register</LinkHeader>}
       </nav>

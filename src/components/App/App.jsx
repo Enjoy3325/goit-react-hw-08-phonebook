@@ -5,33 +5,65 @@ import { Register } from 'pages/Register/Register';
 import { LogIn } from 'pages/Login/Login';
 import { Contacts } from 'pages/Contacts/Contacts';
 import { Page404 } from 'pages/Page404/Page404';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+import { PublicRoute } from 'components/PublicRoute/PublicRoute';
+import { selectName, selectToken } from 'redux/auth/authSelectors';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { currentUser } from 'redux/auth/authOperations';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const selectorName = useSelector(state => state.auth.user.name);
-  const selectorToken = useSelector(state => state.auth.token);
+  const tokenUser = useSelector(selectToken);
+  const nameUser = useSelector(selectName);
+
   useEffect(() => {
-    if (selectorToken && !selectorName) {
-      dispatch(currentUser());
-    }
-  }, [dispatch, selectorToken, selectorName]);
+    dispatch(currentUser());
+  }, [dispatch, tokenUser, nameUser]);
 
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
-        <Route index element={<Home />} />
+        <Route
+          index
+          element={
+            <PublicRoute>
+              <Home />
+            </PublicRoute>
+          }
+        />
+
         <Route
           path="/login"
-          element={selectorToken ? <Navigate to={'/contacts'} /> : <LogIn />}
+          element={
+            <PublicRoute restricted>
+              {' '}
+              tokenUser ? <Navigate to={'/contacts'} /> : <LogIn />
+            </PublicRoute>
+          }
         />
-        <Route path="/register" element={<Register />} />
+
+        <Route
+          path="/register"
+          element={
+            <PublicRoute restricted>
+              {' '}
+              <Register />{' '}
+            </PublicRoute>
+          }
+        />
+
         <Route
           path="/contacts"
-          element={!selectorToken ? <Navigate to={'/login'} /> : <Contacts />}
+          element={
+            <PrivateRoute>
+              {' '}
+              !tokenUser ? <Navigate to={'/login'} /> : <Contacts />{' '}
+            </PrivateRoute>
+          }
         />
+
         <Route path="/*" element={<Page404 />} />
       </Route>
     </Routes>
