@@ -38,8 +38,7 @@ export const App = () => {
           path="/login"
           element={
             <PublicRoute restricted>
-              {' '}
-              tokenUser ? <Navigate to={'/contacts'} /> : <LogIn />
+              <LogIn />
             </PublicRoute>
           }
         />
@@ -48,8 +47,7 @@ export const App = () => {
           path="/register"
           element={
             <PublicRoute restricted>
-              {' '}
-              <Register />{' '}
+              <Register />
             </PublicRoute>
           }
         />
@@ -58,8 +56,7 @@ export const App = () => {
           path="/contacts"
           element={
             <PrivateRoute>
-              {' '}
-              !tokenUser ? <Navigate to={'/login'} /> : <Contacts />{' '}
+              <Contacts />
             </PrivateRoute>
           }
         />
