@@ -1,5 +1,5 @@
-import { getFilter, getContacts } from 'redux/contacts/contactSelectors';
 import { useSelector, useDispatch } from 'react-redux';
+import { getFilter, getContacts } from 'redux/contacts/contactSelectors';
 import { fetchDeleteContacts } from 'redux/contacts/contactsOperations';
 import { BoxList } from './ListContacts.styled';
 import { nanoid } from 'nanoid';

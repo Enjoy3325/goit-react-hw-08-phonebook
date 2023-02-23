@@ -6,9 +6,9 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/contacts');
+      const { data } = await axios.get('/contacts');
 
-      return response.data;
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -33,9 +33,9 @@ export const fetchDeleteContacts = createAsyncThunk(
   'contacts/fetchDeleteContacts',
   async (contactId, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`/contacts/${contactId}`);
+      const { data } = await axios.delete(`/contacts/${contactId}`);
 
-      return response.data;
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -45,10 +45,10 @@ export const fetchDeleteContacts = createAsyncThunk(
 // Зміна контактів, пошук
 export const fetchPatchContacts = createAsyncThunk(
   '/contacts/fetchPatchContacts',
-  async (_, { rejectWithValue }) => {
+  async (contact, { rejectWithValue }) => {
     try {
-      const response = await axios.patch('/contacts/{contactId}');
-      return response.data;
+      await axios.patch('/contacts/{contact.contactId}');
+      return contact;
     } catch (error) {
       return rejectWithValue(error.message);
     }

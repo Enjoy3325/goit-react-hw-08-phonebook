@@ -4,7 +4,6 @@ import {
   logoutUser,
   currentUser,
 } from './authOperations';
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const setPending = state => {
@@ -16,18 +15,20 @@ const setError = (state, { payload }) => {
   state.status = 'rejected';
   state.error = payload;
 };
+
+const initialState = {
+  user: {
+    name: null,
+    email: null,
+  },
+  isLoading: false,
+  token: null,
+  error: null,
+  isAuth: false,
+};
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: {
-      name: null,
-      email: null,
-    },
-    isLoading: false,
-    token: null,
-    error: null,
-    isAuth: false,
-  },
+  initialState,
   reducers: {
     logautEction: (state, action) => {
       state.token = null;
@@ -37,36 +38,44 @@ const authSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(loginUser.pending, setPending)
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(registerUser.pending, setPending)
+      .addCase(registerUser.fulfilled, (state, { payload }) => {
         state.status = 'resolved';
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = payload.user;
+        state.token = payload.token;
+      })
+      .addCase(registerUser.rejected, setError)
+
+      .addCase(loginUser.pending, setPending)
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.status = 'resolved';
+        state.user = payload.user;
+        state.token = payload.token;
         state.isAuth = true;
       })
       .addCase(loginUser.rejected, setError)
 
+      .addCase(logoutUser.pending, setPending)
       .addCase(logoutUser.fulfilled, state => {
-        // state = state.initialState;
-        state.user = null;
+        state.isLoading = false;
+        state.error = null;
         state.token = null;
+        state.user = { name: '', email: '' };
+      })
+      .addCase(logoutUser.rejected, setError)
+
+      .addCase(currentUser.pending, setPending, state => {
+        state.isAuth = true;
+      })
+      .addCase(currentUser.fulfilled, (state, { payload }) => {
+        state.status = 'resolved';
+        state.error = null;
+        state.user = payload;
         state.isAuth = false;
       })
-
-      .addCase(currentUser.pending, setPending)
-      .addCase(currentUser.fulfilled, (state, action) => {
-        state.status = 'resolved';
-        state.user = action.payload;
-      })
-      .addCase(currentUser.rejected, setError)
-
-      .addCase(registerUser.pending, setPending)
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.status = 'resolved';
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      .addCase(registerUser.rejected, setError);
+      .addCase(currentUser.rejected, setError, state => {
+        state.isAuth = false;
+      });
   },
 });
 

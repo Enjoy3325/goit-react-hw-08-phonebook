@@ -1,10 +1,10 @@
 // import { ButtonBack } from 'components/ButtonBack/ButtonBack';
-import { registerUser } from 'redux/auth/authOperations';
 import { useState } from 'react';
-import { Input } from 'components/Input/Input';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { registerUser } from 'redux/auth/authOperations';
+import { Input } from 'components/Input/Input';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -15,10 +15,25 @@ export const RegisterForm = () => {
   const location = useLocation();
 
   // Контрольований інпут
-  const handleNameChange = event => setName(event.target.value);
-  const handleEmailChange = event => setEmail(event.target.value);
-  const handlePasswordChange = event => setPassword(event.target.value);
+  // const handleNameChange = event => setName(event.target.value);
+  // const handleEmailChange = event => setEmail(event.target.value);
+  // const handlePasswordChange = event => setPassword(event.target.value);
 
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
   const handleRegisterSubmit = e => {
     e.preventDefault();
     const registerData = {
@@ -26,7 +41,7 @@ export const RegisterForm = () => {
       email,
       password,
     };
-    console.log('registerData :>> ', registerData);
+
     dispatch(registerUser(registerData));
     reset();
   };
@@ -42,7 +57,7 @@ export const RegisterForm = () => {
         <label>
           <b>Name</b>
           <Input
-            onChange={handleNameChange}
+            onChange={handleChange}
             placeholder="Jack"
             type="text"
             name="name"
@@ -58,14 +73,14 @@ export const RegisterForm = () => {
             name="email"
             placeholder="arhnold@gmail.com"
             required
-            onChange={handleEmailChange}
+            onChange={handleChange}
             value={email}
           />
         </label>
         <label htmlFor="pin">
           <b>Password</b>
           <Input
-            onChange={handlePasswordChange}
+            onChange={handleChange}
             type="password"
             name="password"
             value={password}

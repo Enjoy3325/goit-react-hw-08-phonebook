@@ -1,8 +1,8 @@
-import { chengeFilter } from 'redux/contacts/contactsSlice';
-import { useDispatch } from 'react-redux';
-import { InputFilter, TextFilter, LabelFilter } from './Filter.styled';
-import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
+import { chengeFilter } from 'redux/contacts/contactsSlice';
+import { InputFilter, TextFilter, LabelFilter } from './Filter.styled';
 
 export const Filter = () => {
   const [filter, setFilter] = useState('');

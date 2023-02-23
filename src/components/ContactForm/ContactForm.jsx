@@ -20,14 +20,22 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
-  const handleNameChange = event => setName(event.target.value);
-  const handleNumberChange = event => setNumber(event.target.value);
-
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        break;
+    }
+  };
   const handleSubmit = e => {
     e.preventDefault();
 
     const data = {
-      // id: nanoid(),
       name,
       number,
     };
@@ -62,7 +70,7 @@ export const ContactForm = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            onChange={handleNameChange}
+            onChange={handleChange}
           />
         </LabelForm>
         <LabelForm>
@@ -76,7 +84,7 @@ export const ContactForm = () => {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            onChange={handleNumberChange}
+            onChange={handleChange}
           />
         </LabelForm>
 

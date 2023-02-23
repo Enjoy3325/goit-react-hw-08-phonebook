@@ -10,7 +10,9 @@ export const SharedLayout = () => {
       <Header></Header>
 
       <Suspense>
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
       </Suspense>
     </>
   );

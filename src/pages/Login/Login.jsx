@@ -8,12 +8,22 @@ import { Input } from '../../components/Input/Input';
 export const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [isLogin, setIsLogin] = useState();
+
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const handleEmailChange = event => setEmail(event.target.value);
-  const handlePasswordChange = event => setPassword(event.target.value);
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleLoginSubmit = e => {
     e.preventDefault();
@@ -24,6 +34,7 @@ export const LogIn = () => {
     dispatch(loginUser(loginData));
     reset();
   };
+
   const reset = () => {
     setEmail('');
     setPassword('');
@@ -35,7 +46,7 @@ export const LogIn = () => {
         <label>
           <b>Email</b>
           <Input
-            onChange={handleEmailChange}
+            onChange={handleChange}
             type="email"
             name="email"
             placeholder="arhnold@gmail.com"
@@ -45,7 +56,7 @@ export const LogIn = () => {
         <label htmlFor="pin">
           <b>Password</b>
           <Input
-            onChange={handlePasswordChange}
+            onChange={handleChange}
             type="password"
             name="password"
             value={password}

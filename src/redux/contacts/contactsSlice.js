@@ -2,13 +2,9 @@ import {
   fetchContacts,
   fetchDeleteContacts,
   fetchAddNewContact,
+  fetchPatchContacts,
 } from 'redux/contacts/contactsOperations';
-import { createSlice } from '@reduxjs/toolkit';
-
-const setPending = state => {
-  state.status = 'loading';
-  state.error = null;
-};
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 const setfulfilled = (state, { payload }) => {
   state.status = 'resolved';
@@ -16,10 +12,15 @@ const setfulfilled = (state, { payload }) => {
   state.error = null;
 };
 
-const setError = (state, { payload }) => {
-  state.status = 'rejected';
-  state.error = payload;
-};
+// const setPending = state => {
+//   state.status = 'loading';
+//   state.error = null;
+// };
+
+// const setError = (state, { payload }) => {
+//   state.status = 'rejected';
+//   state.error = payload;
+// };
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -30,31 +31,84 @@ const contactsSlice = createSlice({
     filter: '',
   },
   reducers: {
-    chengeFilter(state, action) {
-      state.filter = action.payload;
+    chengeFilter: (state, { payload }) => {
+      state.filter = payload;
     },
   },
-  extraReducers: builder => {
-    builder.addCase(fetchContacts.pending, setPending);
-    builder.addCase(fetchContacts.fulfilled, setfulfilled);
-    builder.addCase(fetchContacts.rejected, setError);
+  extraReducers: builder =>
+    builder
+      .addCase(fetchContacts.fulfilled, setfulfilled)
+      .addCase(fetchDeleteContacts.fulfilled, (state, { payload }) => {
+        state.status = 'resolved';
+        state.items = state.items.filter(contact => {
+          return contact.id !== payload.id;
+        });
+      })
+      .addCase(fetchAddNewContact.fulfilled, (state, { payload }) => {
+        state.status = 'resolved';
+        state.items = [...state.items, payload];
+      })
+      .addCase(fetchPatchContacts.fulfilled, (state, { payload }) => {
+        const index = state.items.findIndex(
+          contact => contact.id === payload.id
+        );
+        state.items[index] = payload;
+      })
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.pending,
+          fetchDeleteContacts.pending,
+          fetchAddNewContact.pending,
+          fetchPatchContacts.pending
+        ),
+        state => {
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.fulfilled,
+          fetchDeleteContacts.fulfilled,
+          fetchAddNewContact.fulfilled,
+          fetchPatchContacts.fulfilled
+        ),
+        state => {
+          state.isLoading = false;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.rejected,
+          fetchDeleteContacts.rejected,
+          fetchAddNewContact.rejected,
+          fetchPatchContacts.rejected
+        ),
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        }
+      ),
 
-    builder.addCase(fetchDeleteContacts.pending, setPending);
-    builder.addCase(fetchDeleteContacts.fulfilled, (state, { payload }) => {
-      state.status = 'resolved';
-      state.items = state.items.filter(contact => {
-        return contact.id !== payload.id;
-      });
-    });
-    builder.addCase(fetchDeleteContacts.rejected, setError);
+  // builder
+  //   .addCase(fetchContacts.pending, setPending)
+  //   .addCase(fetchContacts.fulfilled, setfulfilled)
+  //   .addCase(fetchContacts.rejected, setError)
+  //   .addCase(fetchDeleteContacts.pending, setPending)
+  //   .addCase(fetchDeleteContacts.fulfilled, (state, { payload }) => {
+  //     state.status = 'resolved';
+  //     state.items = state.items.filter(contact => {
+  //       return contact.id !== payload.id;
+  //     });
+  //   })
+  //   .addCase(fetchDeleteContacts.rejected, setError)
 
-    builder.addCase(fetchAddNewContact.pending, setPending);
-    builder.addCase(fetchAddNewContact.fulfilled, (state, { payload }) => {
-      state.status = 'resolved';
-      state.items = [...state.items, payload];
-    });
-    builder.addCase(fetchAddNewContact.rejected, setError);
-  },
+  //   .addCase(fetchAddNewContact.pending, setPending)
+  //   .addCase(fetchAddNewContact.fulfilled, (state, { payload }) => {
+  //     state.status = 'resolved';
+  //     state.items = [...state.items, payload];
+  //   })
+  //   .addCase(fetchAddNewContact.rejected, setError);
 });
 
 //--- Генератор слайсу
