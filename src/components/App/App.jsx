@@ -11,21 +11,20 @@ import { Page404 } from 'pages/Page404/Page404';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
 
-import { selectName, selectToken } from 'redux/auth/authSelectors';
+import { selectIsAuth } from 'redux/auth/authSelectors';
 import { currentUser } from 'redux/auth/authOperations';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const tokenUser = useSelector(selectToken);
-  const nameUser = useSelector(selectName);
+  const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
     dispatch(currentUser());
-  }, [dispatch, tokenUser, nameUser]);
+  }, [dispatch]);
 
   return (
     <>
-      {!nameUser && (
+      {!isAuth && (
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route

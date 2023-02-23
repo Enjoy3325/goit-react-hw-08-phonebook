@@ -1,9 +1,10 @@
 import { LinkHeader } from 'components/Header/Header.styled';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectToken } from 'redux/auth/authSelectors';
 export const Home = () => {
   const location = useLocation();
-  const selectorToken = useSelector(state => state.auth.token);
+  const selectorToken = useSelector(selectToken);
   return (
     <div>
       <h1>Welcome on bort!</h1>
