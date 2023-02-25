@@ -64,9 +64,9 @@ export const logoutUser = createAsyncThunk(
 //Юзерс поточний
 export const currentUser = createAsyncThunk(
   '/auth/currentUser',
-  async (_, thunkAPI, getState) => {
+  async (_, thunkAPI) => {
     // Reading the token from the state via getState()
-    const tokenA = getState().auth.token;
+    const tokenA = thunkAPI.getState().auth.token;
 
     if (!tokenA) {
       // If there is no token, exit without performing any request

@@ -11,9 +11,16 @@ const setPending = state => {
   state.error = null;
 };
 
+const setCurrentUserFetch = state => {
+  state.status = 'loading';
+  state.isFetchingCurrentUser = true;
+  state.error = null;
+};
 const setError = (state, { payload }) => {
   state.status = 'rejected';
   state.error = payload;
+  state.isFetchingCurrentUser = false;
+  state.isAuth = false;
 };
 
 const initialState = {
@@ -25,6 +32,7 @@ const initialState = {
   token: null,
   error: null,
   isAuth: false,
+  isFetchingCurrentUser: false,
 };
 const authSlice = createSlice({
   name: 'auth',
@@ -43,6 +51,7 @@ const authSlice = createSlice({
         state.status = 'resolved';
         state.user = payload.user;
         state.token = payload.token;
+        state.isAuth = true;
       })
       .addCase(registerUser.rejected, setError)
 
@@ -64,14 +73,13 @@ const authSlice = createSlice({
       })
       .addCase(logoutUser.rejected, setError)
 
-      .addCase(currentUser.pending, setPending, state => {
-        state.isAuth = true;
-      })
+      .addCase(currentUser.pending, setCurrentUserFetch)
       .addCase(currentUser.fulfilled, (state, { payload }) => {
         state.status = 'resolved';
         state.error = null;
         state.user = payload;
-        state.isAuth = false;
+        state.isAuth = true;
+        state.isFetchingCurrentUser = false;
       })
       .addCase(currentUser.rejected, setError, state => {
         state.isAuth = false;

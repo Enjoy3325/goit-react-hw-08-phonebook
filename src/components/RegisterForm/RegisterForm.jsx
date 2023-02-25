@@ -2,14 +2,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { registerUser } from 'redux/auth/authOperations';
 import { Input } from 'components/Input/Input';
+import { LinkHeader } from 'components/Header/Header.styled';
+import { WrapperForm } from 'components/Input/Input.styled';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [show, setShow] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -19,6 +22,7 @@ export const RegisterForm = () => {
   // const handleEmailChange = event => setEmail(event.target.value);
   // const handlePasswordChange = event => setPassword(event.target.value);
 
+  // const handleClick = () => setShow(!show);
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'name':
@@ -52,7 +56,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div>
+    <WrapperForm>
       <form onSubmit={handleRegisterSubmit}>
         <label>
           <b>Name</b>
@@ -87,12 +91,18 @@ export const RegisterForm = () => {
             placeholder="Enter your password"
             required
           />
+          {/* <button h="1.75rem" size="sm" onClick={handleClick}>
+            {show ? 'Hide' : 'Show'}
+          </button> */}
         </label>
-        <button type="submit">Sign In</button>
-        <NavLink to={'/login'} state={{ from: location }}>
+
+        <LinkHeader to={'/register'} type="submit">
+          Sign In
+        </LinkHeader>
+        <LinkHeader to={'/login'} state={{ from: location }}>
           Log in
-        </NavLink>
+        </LinkHeader>
       </form>
-    </div>
+    </WrapperForm>
   );
 };

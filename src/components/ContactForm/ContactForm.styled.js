@@ -4,6 +4,7 @@ export const SectionForm = styled.section`
 `;
 export const LabelForm = styled.label`
   display: flex;
+  justify-content: center;
   flex-direction: column;
   text-align: center;
   margin-bottom: 30px;
@@ -25,6 +26,7 @@ export const Input = styled.input`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 export const TextForm = styled.p`
   margin-bottom: 12px;

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { LinkHeader } from './Header.styled';
+import { LinkHeader, Nav } from './Header.styled';
 import { logoutUser, loginUser } from 'redux/auth/authOperations';
 import { WrapperHeader } from './Header.styled';
 import { selectIsAuth } from 'redux/auth/authSelectors';
@@ -17,7 +17,7 @@ export const Header = () => {
   };
   return (
     <WrapperHeader>
-      <nav>
+      <Nav>
         <LinkHeader to="/" end="true">
           Home
         </LinkHeader>
@@ -32,7 +32,7 @@ export const Header = () => {
           </LinkHeader>
         )}
         {!isAuth && <LinkHeader to="/register">Register</LinkHeader>}
-      </nav>
+      </Nav>
     </WrapperHeader>
   );
 };

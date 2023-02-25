@@ -7,9 +7,11 @@ export const WrapperHeader = styled.div`
   width: 100%;
   justify-content: space-around;
   align-items: center;
-
-  /* margin-right: -0.25em;
-  gap: 20px; */
+`;
+export const Nav = styled.nav`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
 `;
 export const LinkHeader = styled(NavLink)`
   display: flex;
@@ -21,6 +23,7 @@ export const LinkHeader = styled(NavLink)`
   justify-content: center;
   margin: 0.5em;
   margin-top: 40px;
+  margin-bottom: 40px;
   padding: 1em 2em;
   background: none;
   border: 2px solid;

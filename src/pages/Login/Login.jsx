@@ -1,9 +1,10 @@
 import { loginUser } from 'redux/auth/authOperations';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Input } from '../../components/Input/Input';
+import { WrapperForm } from 'components/Input/Input.styled';
+import { LinkHeader } from 'components/Header/Header.styled';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -41,7 +42,7 @@ export const LogIn = () => {
   };
 
   return (
-    <div>
+    <WrapperForm>
       <form onSubmit={handleLoginSubmit}>
         <label>
           <b>Email</b>
@@ -64,11 +65,13 @@ export const LogIn = () => {
             required
           />
         </label>
-        <button type="submite">Log In</button>
-        <NavLink to={'/register'} state={{ from: location }}>
+        <LinkHeader to={'/registr'} type="submite">
+          Log In
+        </LinkHeader>
+        <LinkHeader to={'/register'} state={{ from: location }}>
           Sign up
-        </NavLink>
+        </LinkHeader>
       </form>
-    </div>
+    </WrapperForm>
   );
 };

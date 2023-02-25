@@ -1,5 +1,6 @@
-// import { useState } from 'react';
+// import chakraTheme from '@chakra-ui/theme';
 import PropTypes from 'prop-types';
+import { InputStyled } from './Input.styled';
 
 export const Input = ({
   onChange,
@@ -9,89 +10,50 @@ export const Input = ({
   value,
   type,
 }) => {
-  // const [precentBar, setPrecentBar] = useState('');
-  // const [passInputChange, setPassInputChange] = useState('');
-  // const [passInputClasses, setPassInputClasses] =
-  //   useState('pass-input-passive');
-  // const [toggleIcon, setToggleIcon] = useState('🙈');
-  // const [toggleIconClasses, setToggleIconClasses] = useState(
-  //   'toggle-icon-passive'
-  // );
-  // const [ripple, setRipple] = useState('');
-  // const [passLabel, setPassLabel] = useState('Not enough');
-  // const [type, setType] = useState('password');
+  // const { Button, InputGroup, Input, InputRightElement } =
+  //   chakraTheme.components;
 
-  // const addClass = className => {
-  //   setPrecentBar('');
-  //   if (className) {
-  //     setPrecentBar(className);
-  //   }
-  // };
-  // const toggleType = () => {
-  //   if (type === 'password') {
-  //     setType('text');
-  //     return;
-  //   }
-  //   setType('password');
-  // };
-  // const handlePassInput = e => {
-  //   e.preventDefault();
-  //   setPassInputChange(e.target.value);
-  // };
-  //   if (passInputChange.length === 0 && passInputChange.length <= 5) {
-  //     setPassLabel('Not enough');
-  //     addClass();
-  //   } else if (passInputChange.length >= 6 && passInputChange.length < 9) {
-  //     setPassLabel('Weak');
-  //     addClass('weak');
-  //   } else if (passInputChange.length > 9 && passInputChange.length <= 11) {
-  //     setPassLabel('Not Bad');
-  //     addClass('average');
-  //   } else if (passInputChange.length > 11) {
-  //     setPassLabel('Strong');
-  //     addClass('strong');
-  //   }
-  // };
-
-  // const togglePassInput = e => {
-  //   if (type === 'password') {
-  //     setType('text');
-  //     setToggleIcon('🙉');
-  //     setRipple('ripple-active');
-  //     setPassInputClasses('pass-input-active');
-  //     setToggleIconClasses('toggle-icon-active');
-  //   } else {
-  //     setType('password');
-  //     setToggleIcon('🙈');
-  //     setRipple('ripple-passive');
-  //     setPassInputClasses('pass-input-passive');
-  //     setToggleIconClasses('toggle-icon-passive');
-  //   }
-  // };
   return (
-    <div className="App">
-      <div className="input-container">
-        <div className="input-group">
-          <input
-            id={name}
-            type={type}
-            name={name}
-            min="6"
-            max="15"
-            required={required}
-            // className={passInputClasses}
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange}
-          />
-          {/* <span onChange={{ togglePassInput }}></span> */}
-          {/* <span className={`ripple ${ripple}`}></span> */}
-        </div>
-        <div className="pass-strength">
-          <div className="strength-percent"></div>
-        </div>
+    // <InputGroup size="md">
+    //   <Input
+    //     onChange={onChange}
+    //     id={name}
+    //     name={name}
+    //     min="3"
+    //     max="15"
+    //     required={required}
+    //     placeholder={placeholder}
+    //     value={value}
+    //     pr="4.5rem"
+    //     type={show ? 'text' : 'password'}
+    //   />
+    //   <InputRightElement width="4.5rem">
+    //     <Button h="1.75rem" size="sm" onClick={handleClick}>
+    //       {show ? 'Hide' : 'Show'}
+    //     </Button>
+    //   </InputRightElement>
+    // </InputGroup>
+
+    // <WrapperForm>
+    <div className="input-container">
+      <div className="input-group">
+        <InputStyled
+          id={name}
+          type={type}
+          name={name}
+          min="3"
+          max="15"
+          required={required}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
+      <div className="pass-strength">
+        <div className="strength-percent"></div>
       </div>
     </div>
+    // </WrapperForm>
   );
 };
 
@@ -102,5 +64,3 @@ Input.propTypes = {
   required: PropTypes.bool,
   value: PropTypes.node,
 };
-
-// ={type === 'password' ? '🙈' : '🙉'}

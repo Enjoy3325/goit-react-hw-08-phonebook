@@ -1,8 +1,10 @@
+import { TitleStyled } from 'pages/Home/Home.styled';
+
 export const Page404 = () => {
   return (
     <>
       <div>
-        <h1>Sorry, error. Not found!</h1>
+        <TitleStyled>Sorry, error. Not found!</TitleStyled>
       </div>
     </>
   );
