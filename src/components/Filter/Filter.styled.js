@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 export const LabelFilter = styled.label`
   display: block;
-
   text-align: center;
-  margin-bottom: 30px;
 `;
 
 export const InputFilter = styled.input`

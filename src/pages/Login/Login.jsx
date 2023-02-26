@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Input } from '../../components/Input/Input';
 import { WrapperForm } from 'components/Input/Input.styled';
+import { WrapperButton } from 'components/RegisterForm/RegisterForm.styled';
 import { LinkHeader } from 'components/Header/Header.styled';
 
 export const LogIn = () => {
@@ -65,12 +66,14 @@ export const LogIn = () => {
             required
           />
         </label>
-        <LinkHeader to={'/registr'} type="submite">
-          Log In
-        </LinkHeader>
-        <LinkHeader to={'/register'} state={{ from: location }}>
-          Sign up
-        </LinkHeader>
+        <WrapperButton>
+          <LinkHeader to={'/registr'} type="submite">
+            Log In
+          </LinkHeader>
+          <LinkHeader to={'/register'} state={{ from: location }}>
+            Sign up
+          </LinkHeader>
+        </WrapperButton>
       </form>
     </WrapperForm>
   );

@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 
+export const ItemContactStyled = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+`;
 export const Text = styled.p`
   margin-bottom: 8px;
   font-weight: 700;
 `;
 
 export const ButtonCard = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 20px;
   width: 40px;
   height: 40px;

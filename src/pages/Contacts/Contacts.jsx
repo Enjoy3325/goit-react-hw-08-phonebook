@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/contacts/contactsOperations';
 import { ButtonBack } from 'components/ButtonBack/ButtonBack';
 import { useEffect } from 'react';
+
+import {
+  TitleContactsStyled,
+  BoxFilterContacts,
+  SubtitleContactsStyled,
+} from './Contacts.styled';
 export const Contacts = () => {
   const { error, status } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
@@ -17,18 +23,18 @@ export const Contacts = () => {
   return (
     <Wrapper>
       <div>
-        <h1>Phonebook </h1>
+        <TitleContactsStyled>Phonebook </TitleContactsStyled>
         {status === 'loading' ? <ProgressBar /> : ''}
         {error ? <h2>An error occured: {error}</h2> : <ContactForm />}
       </div>
 
       <section>
-        <div>
+        <BoxFilterContacts>
           <Filter />
-          <h2>Contacts</h2>
           <ButtonBack />
+          <SubtitleContactsStyled>Contacts</SubtitleContactsStyled>
           <ListContacts />
-        </div>
+        </BoxFilterContacts>
       </section>
     </Wrapper>
   );

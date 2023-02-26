@@ -1,20 +1,11 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
-export const WrapperHeader = styled.div`
+export const WrapperButton = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  background-color: #345446;
 `;
-export const Nav = styled.nav`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 40px;
-`;
-export const LinkHeader = styled(NavLink)`
+export const ButtonDelate = styled.button`
   display: flex;
   text-align: center;
   font: inherit;

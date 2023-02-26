@@ -7,6 +7,7 @@ import { registerUser } from 'redux/auth/authOperations';
 import { Input } from 'components/Input/Input';
 import { LinkHeader } from 'components/Header/Header.styled';
 import { WrapperForm } from 'components/Input/Input.styled';
+import { ButtonDelate, WrapperButton } from './RegisterForm.styled';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -95,13 +96,15 @@ export const RegisterForm = () => {
             {show ? 'Hide' : 'Show'}
           </button> */}
         </label>
+        <WrapperButton>
+          <ButtonDelate to={'/register'} type="submit">
+            Sign Up
+          </ButtonDelate>
 
-        <LinkHeader to={'/register'} type="submit">
-          Sign In
-        </LinkHeader>
-        <LinkHeader to={'/login'} state={{ from: location }}>
-          Log in
-        </LinkHeader>
+          <LinkHeader to={'/login'} state={{ from: location }}>
+            Log in
+          </LinkHeader>
+        </WrapperButton>
       </form>
     </WrapperForm>
   );

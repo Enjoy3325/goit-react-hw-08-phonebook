@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
-import { ButtonCard, Text } from './CardContact.styled';
 import React from 'react';
+import { ButtonCard, Text, ItemContactStyled } from './CardContact.styled';
 
 export const CardContact = ({ id, name, number, handlDeleteContacts }) => {
   return (
-    <li>
+    <ItemContactStyled>
       <Text>
         {name}: {number}
       </Text>
@@ -18,7 +18,7 @@ export const CardContact = ({ id, name, number, handlDeleteContacts }) => {
       >
         <FiTrash2 />
       </ButtonCard>
-    </li>
+    </ItemContactStyled>
   );
 };
 
