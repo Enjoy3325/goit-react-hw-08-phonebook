@@ -2,10 +2,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-// import { NavLink } from 'react-router-dom';
 import { registerUser } from 'redux/auth/authOperations';
 import { Input } from 'components/Input/Input';
-import { LinkHeader } from 'components/Header/Header.styled';
 import { WrapperForm } from 'components/Input/Input.styled';
 import { ButtonDelate, WrapperButton } from './RegisterForm.styled';
 
