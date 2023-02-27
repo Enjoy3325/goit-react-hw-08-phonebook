@@ -63,7 +63,9 @@ export const LogIn = () => {
           />
         </label>
         <WrapperButton>
-          <ButtonAuth type="submite">Log In</ButtonAuth>
+          <ButtonAuth type="submite" state={{ from: location }}>
+            Log In
+          </ButtonAuth>
           <ButtonAuth>Sign up</ButtonAuth>
         </WrapperButton>
       </form>
