@@ -14,7 +14,7 @@ export const Home = () => {
       <Subtitle>Phonebook 2.0</Subtitle>
       {selectorToken && (
         <LinkHeader to={'/contacts'} state={{ from: location }}>
-          <b>Go back</b>
+          <p>Go back</p>
         </LinkHeader>
       )}
     </WrapperHomePage>
