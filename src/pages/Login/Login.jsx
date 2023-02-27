@@ -6,6 +6,7 @@ import { Input } from '../../components/Input/Input';
 import { WrapperForm } from 'components/Input/Input.styled';
 import { WrapperButton } from 'components/RegisterForm/RegisterForm.styled';
 import { LinkHeader } from 'components/Header/Header.styled';
+import ButtonAuth from './Login.styled';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -29,11 +30,7 @@ export const LogIn = () => {
 
   const handleLoginSubmit = e => {
     e.preventDefault();
-    const loginData = {
-      email,
-      password,
-    };
-    dispatch(loginUser(loginData));
+    dispatch(loginUser({ email, password }));
     reset();
   };
 
@@ -67,12 +64,8 @@ export const LogIn = () => {
           />
         </label>
         <WrapperButton>
-          <LinkHeader to={'/registr'} type="submite">
-            Log In
-          </LinkHeader>
-          <LinkHeader to={'/register'} state={{ from: location }}>
-            Sign up
-          </LinkHeader>
+          <ButtonAuth type="submite">Log In</ButtonAuth>
+          <ButtonAuth>Sign up</ButtonAuth>
         </WrapperButton>
       </form>
     </WrapperForm>

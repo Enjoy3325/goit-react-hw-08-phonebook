@@ -97,13 +97,17 @@ export const RegisterForm = () => {
           </button> */}
         </label>
         <WrapperButton>
-          <ButtonDelate to={'/register'} type="submit">
+          <ButtonDelate
+            to={'/contacts'}
+            type="submit"
+            state={{ from: location }}
+          >
             Sign Up
           </ButtonDelate>
 
-          <LinkHeader to={'/login'} state={{ from: location }}>
+          {/* <LinkHeader to={'/login'} state={{ from: location }}>
             Log in
-          </LinkHeader>
+          </LinkHeader> */}
         </WrapperButton>
       </form>
     </WrapperForm>
