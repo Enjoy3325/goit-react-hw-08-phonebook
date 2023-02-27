@@ -6,7 +6,7 @@ export const ButtonBack = () => {
   return (
     <>
       <LinkHeader to={'/'} state={{ from: location }}>
-        <b>Go back</b>
+        <p>Go back</p>
       </LinkHeader>
     </>
   );
