@@ -5,12 +5,16 @@ import { useDispatch } from 'react-redux';
 import { Input } from '../../components/Input/Input';
 import { WrapperForm } from 'components/Input/Input.styled';
 import { WrapperButton } from 'components/RegisterForm/RegisterForm.styled';
+import {
+  BoxPassword,
+  BtnIconEya,
+} from 'components/RegisterForm/RegisterForm.styled';
 import ButtonAuth from './Login.styled';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [isShow, setIsShow] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -51,17 +55,25 @@ export const LogIn = () => {
             required
           />
         </label>
-        <label htmlFor="pin">
-          <b>Password</b>
-          <Input
-            onChange={handleChange}
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter your password"
-            required
-          />
-        </label>
+        <BoxPassword>
+          <label htmlFor="pin">
+            <b>Password</b>
+            <Input
+              type={isShow ? 'text' : 'password'}
+              onChange={handleChange}
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              required
+            />
+            <BtnIconEya
+              type="button"
+              onClick={() => setIsShow(prevState => !prevState)}
+            >
+              {!isShow ? <FaEye /> : <FaEyeSlash />}
+            </BtnIconEya>
+          </label>
+        </BoxPassword>
         <WrapperButton>
           <ButtonAuth type="submite" state={{ from: location }}>
             Log In
