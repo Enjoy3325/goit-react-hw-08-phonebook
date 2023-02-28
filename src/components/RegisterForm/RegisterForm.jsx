@@ -1,17 +1,23 @@
-// import { ButtonBack } from 'components/ButtonBack/ButtonBack';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { registerUser } from 'redux/auth/authOperations';
 import { Input } from 'components/Input/Input';
 import { WrapperForm } from 'components/Input/Input.styled';
-import { ButtonDelate, WrapperButton } from './RegisterForm.styled';
+import {
+  ButtonDelate,
+  WrapperButton,
+  BoxPassword,
+  BtnIconEya,
+} from './RegisterForm.styled';
+import { FaEye } from 'react-icons/fa';
+import { FaEyeSlash } from 'react-icons/fa';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [show, setShow] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -39,13 +45,13 @@ export const RegisterForm = () => {
   };
   const handleRegisterSubmit = e => {
     e.preventDefault();
-    const registerData = {
-      name,
-      email,
-      password,
-    };
-
-    dispatch(registerUser(registerData));
+    dispatch(
+      registerUser({
+        name,
+        email,
+        password,
+      })
+    );
     reset();
   };
   const reset = () => {
@@ -80,20 +86,26 @@ export const RegisterForm = () => {
             value={email}
           />
         </label>
-        <label htmlFor="pin">
-          <b>Password</b>
-          <Input
-            onChange={handleChange}
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter your password"
-            required
-          />
-          {/* <button h="1.75rem" size="sm" onClick={handleClick}>
-            {show ? 'Hide' : 'Show'}
-          </button> */}
-        </label>
+        <BoxPassword>
+          <label htmlFor="pin">
+            <b>Password</b>
+            <Input
+              type={isShow ? 'text' : 'password'}
+              onChange={handleChange}
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              required
+            />
+            <BtnIconEya
+              type="button"
+              onClick={() => setIsShow(prevState => !prevState)}
+            >
+              {!isShow ? <FaEye /> : <FaEyeSlash />}
+            </BtnIconEya>
+          </label>
+        </BoxPassword>
+
         <WrapperButton>
           <ButtonDelate
             to={'/contacts'}

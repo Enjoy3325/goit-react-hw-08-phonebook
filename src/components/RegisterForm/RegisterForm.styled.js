@@ -33,3 +33,12 @@ export const ButtonDelate = styled.button`
     color: #44ff82;
   }
 `;
+export const BoxPassword = styled.div`
+  display: flex;
+  position: relative;
+`;
+export const BtnIconEya = styled.button`
+  position: absolute;
+  top: 45px;
+  left: 240px;
+`;
