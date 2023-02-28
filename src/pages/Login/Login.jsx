@@ -10,6 +10,8 @@ import {
   BtnIconEya,
 } from 'components/RegisterForm/RegisterForm.styled';
 import ButtonAuth from './Login.styled';
+import { FaEye } from 'react-icons/fa';
+import { FaEyeSlash } from 'react-icons/fa';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
