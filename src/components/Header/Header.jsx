@@ -3,6 +3,7 @@ import { LinkHeader, Nav } from './Header.styled';
 import { logoutUser, loginUser } from 'redux/auth/authOperations';
 import { WrapperHeader } from './Header.styled';
 import { selectIsAuth } from 'redux/auth/authSelectors';
+import ButtonAuth from 'pages/Login/Login.styled';
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -23,9 +24,9 @@ export const Header = () => {
         </LinkHeader>
 
         {isAuth ? (
-          <LinkHeader onClick={hendleLogout} to="/">
+          <ButtonAuth onClick={hendleLogout} to="/">
             Log out
-          </LinkHeader>
+          </ButtonAuth>
         ) : (
           <LinkHeader onClick={hendeleLogin} to="/login">
             Log in
