@@ -24,7 +24,7 @@ export const Header = () => {
         </LinkHeader>
 
         {isAuth ? (
-          <ButtonAuth onClick={hendleLogout} to="/">
+          <ButtonAuth type="button" onClick={hendleLogout} to="/">
             Log out
           </ButtonAuth>
         ) : (

@@ -70,6 +70,7 @@ const authSlice = createSlice({
         state.error = null;
         state.token = null;
         state.user = { name: '', email: '' };
+        state.isAuth = false;
       })
       .addCase(logoutUser.rejected, setError)
 
