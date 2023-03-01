@@ -12,6 +12,7 @@ import {
 import ButtonAuth from './Login.styled';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
+import { LinkHeader } from 'components/Header/Header.styled';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -80,7 +81,9 @@ export const LogIn = () => {
           <ButtonAuth type="submite" state={{ from: location }}>
             Log In
           </ButtonAuth>
-          <ButtonAuth>Sign up</ButtonAuth>
+          <LinkHeader to={'/register'} state={{ from: location }}>
+            Sign up
+          </LinkHeader>
         </WrapperButton>
       </form>
     </WrapperForm>
