@@ -16,7 +16,6 @@ const setCurrentUserFetch = state => {
 };
 const setError = (state, { payload }) => {
   state.error = payload;
-  state.isFetchingCurrentUser = false;
   state.isAuth = false;
 };
 
