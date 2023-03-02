@@ -81,6 +81,7 @@ export const LogIn = () => {
           <ButtonAuth type="submite" state={{ from: location }}>
             Log In
           </ButtonAuth>
+
           <LinkHeader to={'/register'} state={{ from: location }}>
             Sign up
           </LinkHeader>

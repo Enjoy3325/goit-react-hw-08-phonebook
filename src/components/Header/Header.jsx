@@ -7,7 +7,6 @@ import ButtonAuth from 'pages/Login/Login.styled';
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
-  console.log('isAuth :>> ', isAuth);
   const dispatch = useDispatch();
 
   const hendeleLogin = () => {

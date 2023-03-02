@@ -11,7 +11,6 @@ import { Contacts } from 'pages/Contacts/Contacts';
 import { Page404 } from 'pages/Page404/Page404';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
-
 import { selectIsFetchingCurrentUser } from 'redux/auth/authSelectors';
 import { currentUser } from 'redux/auth/authOperations';
 

@@ -10,11 +10,13 @@ const setfulfilled = (state, { payload }) => {
   state.status = 'resolved';
   state.items = payload;
   state.error = null;
+  // state.isLoading = false;
 };
 
 // const setPending = state => {
 //   state.status = 'loading';
 //   state.error = null;
+//   state.isLoading = true;
 // };
 
 // const setError = (state, { payload }) => {
@@ -25,8 +27,8 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     items: [],
-    isLoading: false,
-    status: null,
+    // isLoading: false,
+    status: 'loading',
     error: null,
     filter: '',
   },
@@ -62,7 +64,9 @@ const contactsSlice = createSlice({
           fetchPatchContacts.pending
         ),
         state => {
-          state.isLoading = true;
+          // state.isLoading = true;
+          state.status = 'loading';
+          state.error = null;
         }
       )
       .addMatcher(
@@ -73,8 +77,9 @@ const contactsSlice = createSlice({
           fetchPatchContacts.fulfilled
         ),
         state => {
-          state.isLoading = false;
+          // state.isLoading = false;
           state.error = null;
+          state.status = 'resolved';
         }
       )
       .addMatcher(
@@ -85,8 +90,9 @@ const contactsSlice = createSlice({
           fetchPatchContacts.rejected
         ),
         (state, { payload }) => {
-          state.isLoading = false;
+          // state.isLoading = false;
           state.error = payload;
+          state.status = 'rejected';
         }
       ),
 

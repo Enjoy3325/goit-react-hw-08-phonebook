@@ -7,17 +7,14 @@ import {
 import { createSlice } from '@reduxjs/toolkit';
 
 const setPending = state => {
-  state.status = 'loading';
   state.error = null;
 };
 
 const setCurrentUserFetch = state => {
-  state.status = 'loading';
   state.isFetchingCurrentUser = true;
   state.error = null;
 };
 const setError = (state, { payload }) => {
-  state.status = 'rejected';
   state.error = payload;
   state.isFetchingCurrentUser = false;
   state.isAuth = false;
@@ -28,7 +25,7 @@ const initialState = {
     name: null,
     email: null,
   },
-  isLoading: false,
+
   token: null,
   error: null,
   isAuth: false,
@@ -48,7 +45,6 @@ const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, setPending)
       .addCase(registerUser.fulfilled, (state, { payload }) => {
-        state.status = 'resolved';
         state.user = payload.user;
         state.token = payload.token;
         state.isAuth = true;
@@ -57,7 +53,6 @@ const authSlice = createSlice({
 
       .addCase(loginUser.pending, setPending)
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        state.status = 'resolved';
         state.user = payload.user;
         state.token = payload.token;
         state.isAuth = true;
@@ -66,7 +61,6 @@ const authSlice = createSlice({
 
       .addCase(logoutUser.pending, setPending)
       .addCase(logoutUser.fulfilled, state => {
-        state.isLoading = false;
         state.error = null;
         state.token = null;
         state.user = { name: '', email: '' };
@@ -76,7 +70,6 @@ const authSlice = createSlice({
 
       .addCase(currentUser.pending, setCurrentUserFetch)
       .addCase(currentUser.fulfilled, (state, { payload }) => {
-        state.status = 'resolved';
         state.error = null;
         state.user = payload;
         state.isAuth = true;
