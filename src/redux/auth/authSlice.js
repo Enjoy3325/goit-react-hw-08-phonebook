@@ -6,9 +6,9 @@ import {
 } from './authOperations';
 import { createSlice } from '@reduxjs/toolkit';
 
-const setPending = state => {
-  state.error = null;
-};
+// const setPending = state => {
+//   state.error = null;
+// };
 
 const setCurrentUserFetch = state => {
   state.isFetchingCurrentUser = true;
@@ -42,27 +42,28 @@ const authSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(registerUser.pending, setPending)
+
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
+        state.error = null;
         state.isAuth = true;
       })
       .addCase(registerUser.rejected, setError)
 
-      .addCase(loginUser.pending, setPending)
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
+        state.error = null;
         state.isAuth = true;
       })
       .addCase(loginUser.rejected, setError)
 
-      .addCase(logoutUser.pending, setPending)
       .addCase(logoutUser.fulfilled, state => {
         state.error = null;
         state.token = null;
         state.user = { name: '', email: '' };
+        state.error = null;
         state.isAuth = false;
       })
       .addCase(logoutUser.rejected, setError)
@@ -72,10 +73,12 @@ const authSlice = createSlice({
         state.error = null;
         state.user = payload;
         state.isAuth = true;
+        state.error = null;
         state.isFetchingCurrentUser = false;
       })
       .addCase(currentUser.rejected, setError, state => {
         state.isAuth = false;
+        state.isFetchingCurrentUser = false;
       });
   },
 });
