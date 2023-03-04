@@ -14,7 +14,7 @@ import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { LinkHeader } from 'components/Header/Header.styled';
 
-export const LogIn = () => {
+const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isShow, setIsShow] = useState(false);
@@ -90,3 +90,5 @@ export const LogIn = () => {
     </WrapperForm>
   );
 };
+
+export { LogIn as default };

@@ -1,18 +1,21 @@
-import * as React from 'react';
+import React, { lazy } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from '../../components/SharedLayout/SharedLayout';
-import { Home } from 'pages/Home/Home';
-import { Register } from 'pages/Register/Register';
-import { LogIn } from 'pages/Login/Login';
-import { Contacts } from 'pages/Contacts/Contacts';
-import { Page404 } from 'pages/Page404/Page404';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
 import { selectIsFetchingCurrentUser } from 'redux/auth/authSelectors';
 import { currentUser } from 'redux/auth/authOperations';
+
+const Home = lazy(() => import('../../pages/Home/Home'));
+const Register = lazy(() => import('../../pages/Register/Register'));
+const LogIn = lazy(() => import('../../pages/Login/Login'));
+const Contacts = lazy(() => import('../../pages/Contacts/Contacts'));
+const Page404 = lazy(() => import('../../pages/Page404/Page404'));
+// const PrivateRoute = lazy(() => import('components/PrivateRoute/PrivateRoute'));
+// const PublicRoute = lazy(() => import('components/PublicRoute/PublicRoute'));
 
 export const App = () => {
   const dispatch = useDispatch();

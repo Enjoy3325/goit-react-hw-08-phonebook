@@ -5,7 +5,7 @@ import { selectToken } from 'redux/auth/authSelectors';
 
 import { WrapperHomePage, TitleStyled, Subtitle } from './Home.styled';
 
-export const Home = () => {
+const Home = () => {
   const location = useLocation();
   const selectorToken = useSelector(selectToken);
   return (
@@ -20,3 +20,5 @@ export const Home = () => {
     </WrapperHomePage>
   );
 };
+
+export { Home as default };

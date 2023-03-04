@@ -1,6 +1,6 @@
 import { TitleStyled } from 'pages/Home/Home.styled';
 
-export const Page404 = () => {
+const Page404 = () => {
   return (
     <>
       <div>
@@ -9,3 +9,4 @@ export const Page404 = () => {
     </>
   );
 };
+export { Page404 as default };
